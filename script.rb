@@ -8,15 +8,16 @@ end
 begin
   handle = ARGV[0]
   puts 'Please specify a handle' unless handle
-  until options.include? handle
+  until handle
     puts 'Enter a handle'
-    handle = eval gets.chomp.downcase
-    break if options.include? handle
+    handle = gets.chomp.downcase
+    break if handle
   end
+  handle_link = "http://codeforces.com/submissions/#{handle}"
   agent = Mechanize.new
-  page = agent.get "http://codeforces.com/submissions/#{handle}"
-  code = page.code
-  exit_prog if code == 302
+  agent.redirect_ok = !1
+  page = agent.get handle_link
+  exit_prog if page.code == "302"
 rescue SocketError
   puts 'Please connect to internet.'
 end
