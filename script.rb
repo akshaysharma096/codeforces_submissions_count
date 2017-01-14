@@ -17,5 +17,5 @@ begin
     puts google_page
   end
 rescue SocketError
-  puts 'Please connect to interent.'
+  puts 'Please connect to internet.'
 end
