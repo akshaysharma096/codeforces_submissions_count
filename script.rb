@@ -16,14 +16,16 @@ begin
   until handle
     puts 'Enter a handle'
     handle = gets.chomp.downcase
-    break if handle
   end
+
   handle_link = "http://codeforces.com/submissions/#{handle}/"
   agent = Mechanize.new
   agent.redirect_ok = !1
   page = agent.get handle_link
+
   exit_prog if page.code == "302"
   no_submission unless page.at_css('span.page-index > a')
+
   problem_count ||= page.css('span.verdict-accepted').size
   counter=page.css('span.page-index > a')[-1].text.to_i
   page_count = 2
@@ -32,9 +34,10 @@ begin
     page = agent.get new_page
     problem_count += page.css('span.verdict-accepted').size
   end
+
   puts "Your successful problem submissions are: #{problem_count}"
 rescue NoMethodError
   puts 'Error'
-rescue SocketError
+rescue SocketErrg or
   puts 'Please connect to internet.'
 end
