@@ -26,7 +26,7 @@ begin
     page = agent.get new_page
     problem_count += page.css('span.verdict-accepted').size
   end
-  puts "Your successfull problem submissions are: #{problem_count}"
+  puts "Your successful problem submissions are: #{problem_count}"
 rescue NoMethodError
   puts 'Error'
 rescue SocketError
