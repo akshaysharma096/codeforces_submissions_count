@@ -38,6 +38,6 @@ begin
   puts "Your successful problem submissions are: #{problem_count}"
 rescue NoMethodError
   puts 'Error'
-rescue SocketErrg or
+rescue SocketError
   puts 'Please connect to internet.'
 end
