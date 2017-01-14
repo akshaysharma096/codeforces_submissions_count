@@ -5,6 +5,11 @@ def exit_prog
   exit
 end
 
+def no_submission
+  puts 'You have made no submissions'
+  exit
+end
+
 begin
   handle = ARGV[0]
   puts 'Please specify a handle' unless handle
@@ -18,6 +23,7 @@ begin
   agent.redirect_ok = !1
   page = agent.get handle_link
   exit_prog if page.code == "302"
+  no_submission unless page.at_css('span.page-index > a')
   problem_count ||= page.css('span.verdict-accepted').size
   counter=page.css('span.page-index > a')[-1].text.to_i
   page_count = 2
